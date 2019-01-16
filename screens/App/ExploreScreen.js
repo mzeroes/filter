@@ -1,7 +1,8 @@
 import React from "react";
 import { FlatList, View } from "react-native";
-import { baseStyles } from "../../constants/Styles";
+import { baseStyles } from "../../styles";
 import ProfileView from "../../components/ProfileCard";
+import { usersAsync } from "../../api/user";
 
 export default class ExploreScreen extends React.Component {
   static navigationOptions = {
@@ -14,29 +15,15 @@ export default class ExploreScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.usersAsync();
+    this.bootstrap();
   }
 
-  // eslint-disable-next-line no-unused-vars
   keyExtractor = (item, index) => item.id;
 
-  usersAsync = async () => {
-    // sample data
-    const response = await fetch("https://randomuser.me/api/?page=3&results=10&seed=abcd");
-    const { results } = await response.json();
-
-    const processUsers = user => ({
-      id: user.phone,
-      image: user.picture.medium,
-      name: `${user.name.first} ${user.name.last}`,
-      email: user.email,
-    });
-
-    const users = results.map(processUsers);
-    this.setState({
-      users
-    });
-  }
+  bootstrap = async () => {
+    const users = await usersAsync();
+    this.setState({ users });
+  };
 
   render() {
     const { users } = this.state;

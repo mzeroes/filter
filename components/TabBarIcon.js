@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon } from "expo";
 
-import { colors } from "../config";
+import { colors } from "../styles/colors";
 
 const TabBarIcon = (props) => {
   const size = props.size ? props.size : 28;

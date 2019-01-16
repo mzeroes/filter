@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import { MonoText } from "../../components/StyledText";
-import { baseStyles } from "../../constants/Styles";
+import { baseStyles } from "../../styles";
 
 const styles = baseStyles;
 

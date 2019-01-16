@@ -14,7 +14,7 @@ import {
 } from "react-native";
 
 import { ImagePicker, Permissions } from "expo";
-import { colors } from "../../config";
+import { colors } from "../../styles/colors";
 import TabBarIcon from "../../components/TabBarIcon";
 import { deviceInfo } from "../../constants";
 import Layout from "../../constants/Layout";
@@ -54,7 +54,8 @@ export default class App extends Component {
             //   source={require("../../assets/images/upload-image.png")}
             //   style={styles.maybeRenderImage}
             // />
-            <TabBarIcon name="ios-image" size={Layout.window.width} />
+            // <TabBarIcon name="ios-images" size={80} />
+            <Text />
           )
             : (
               <Image source={{ uri: image }} style={styles.maybeRenderImage} />
@@ -66,7 +67,7 @@ export default class App extends Component {
           style={styles.maybeRenderImageText}
         >
           <Text>
-            { image || <TabBarIcon name="ios-camera" size={36} /> }
+            { image || <TabBarIcon name="ios-camera" size={Layout.window.width} /> }
           </Text>
         </TouchableOpacity>
       </View>
@@ -289,7 +290,6 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   maybeRenderImageContainer: {
-    padding: 30,
     width: "100%",
   },
   maybeRenderImage: {

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
-import { colors } from "../config";
+import { colors } from "../styles/colors";
 
 const TextCard = props => (
   <View style={styles.container}>

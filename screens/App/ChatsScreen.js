@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { connect } from "react-redux";
 
-import { baseStyles } from "../../constants/Styles";
+import { baseStyles } from "../../styles";
 import UserProfileCard from "../../components/UserProfileCard";
 
 class ChatsScreen extends React.Component {

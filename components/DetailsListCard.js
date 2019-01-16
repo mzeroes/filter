@@ -10,7 +10,7 @@ import {
 import DetailsCard from "./DetailsCard";
 import TNCAndLogoutCard from "./TNCAndLogoutCard";
 
-import { colors } from "../config";
+import { colors } from "../styles/colors";
 
 const SectionHeader = ({ title }) => (
   <View style={styles.sectionHeaderContainer}>

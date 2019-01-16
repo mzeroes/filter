@@ -3,7 +3,8 @@
     "name": "thefilter",
     "slug": "thefilter",
     "privacy": "public",
-    "sdkVersion": "31.0.0",
+    "sdkVersion": "32.0.0",
+    "scheme": "mzeroes",
     "platforms": [
       "ios",
       "android"
@@ -14,16 +15,22 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#E2E2E2"
+      "backgroundColor": "#f1f1f1"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 60000
     },
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "io.github.mzeroes.thefilter"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "io.github.mzeroes.thefilter"
     }
   }
 }

@@ -9,11 +9,17 @@ import {
 } from "react-native";
 
 import { MonoText } from "../../components/StyledText";
-import { baseStyles } from "../../constants/Styles";
-import { colors } from "../../config";
-import { storeTokenInStore } from "../../redux/store";
-import { validateFBTokenAsync, webSessionLoginFBAsync } from "../../config/api";
+import { baseStyles } from "../../styles";
+import { colors } from "../../styles/colors";
+import {
+  storeTokenInStore,
+  userUpdate
+} from "../../api/stored";
 
+import {
+  webSessionLoginFBAsync,
+  webSessionLoginGoogleAsync,
+} from "../../api";
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = { header: null };
@@ -24,23 +30,42 @@ export default class LoginScreen extends React.Component {
     result: null
   };
 
-  LoginAsync = async (token) => {
+  LoginAsync = async (tokenData) => {
     if (this.state.validatedUser) {
-      await storeTokenInStore(token);
-      console.log(`[INFO**] LoginAsync validatedUser: ${token}`);
+      await storeTokenInStore(tokenData);
+      console.log(`[INFO] LoginAsync validatedUser: ${tokenData}`);
+      userUpdate();
       this.props.navigation.navigate("App");
     }
-    console.log(`[ERRORS**] LoginAsync : ${this.state.errorMessage}`);
+    if (this.state.errorMessage) {
+      console.warn(`[ERRORS] LoginAsync : ${this.state.errorMessage}`);
+    }
   };
 
-  LoginAuthSessionAsync = async () => {
+  LoginAuthSessionFBAsync = async () => {
     const result = await webSessionLoginFBAsync();
-    const response = await validateFBTokenAsync(result.params.access_token);
-    if (response) {
-      this.setState({ validatedUser: true });
+    if (result.type === "success") {
+      const resultTokenData = {
+        token: result.params.access_token,
+        type: "Facebook"
+      };
+      this.setState({ validatedUser: true, result });
+      console.log(this.state);
+      await this.LoginAsync(resultTokenData);
     }
-    this.setState({ result });
-    await this.LoginAsync(result.params.access_token);
+  };
+
+  LoginAuthSessionGoogleAsync = async () => {
+    const result = await webSessionLoginGoogleAsync();
+    if (result.type === "success") {
+      const resultTokenData = {
+        token: result.params.access_token,
+        type: "Google"
+      };
+      this.setState({ validatedUser: true, result });
+
+      await this.LoginAsync(resultTokenData);
+    }
   };
 
   render() {
@@ -91,7 +116,7 @@ export default class LoginScreen extends React.Component {
               or
             </Text>
             <TouchableOpacity
-              onPress={this.LoginAuthSessionAsync}
+              onPress={this.LoginAuthSessionFBAsync}
               style={{
                 color: colors.white,
                 alignItems: "center",
@@ -101,7 +126,21 @@ export default class LoginScreen extends React.Component {
                 width: "100%",
               }}
             >
-              <Text style={{ color: "#fff" }}>Login using facebook</Text>
+              <Text style={{ color: "#fff" }}>Login with Facebook</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.LoginAuthSessionGoogleAsync}
+              style={{
+                marginTop: 10,
+                color: colors.white,
+                alignItems: "center",
+                backgroundColor: "#ff0000",
+                borderRadius: 10,
+                padding: 10,
+                width: "100%",
+              }}
+            >
+              <Text style={{ color: "#fff" }}>Login with Google</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

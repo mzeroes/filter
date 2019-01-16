@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, ScrollView, Text, View, StyleSheet } from "react-native";
-import { colors } from "../config";
+import { colors } from "../styles/colors";
 
 const image = require("../assets/images/profile-1.png");
 
@@ -43,7 +43,7 @@ const UserProfileCard = (props) => {
       <Text style={{ fontSize: 16 }}>
         {user.id}
       </Text>
-      <Text style={{ fontSize: 14 , marginTop: 16 }}>
+      <Text style={{ fontSize: 14, marginTop: 16 }}>
         {user.details}
       </Text>
     </View>

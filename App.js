@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import NavigationService from "./utils/NavigationService";
 import AppNavigator from "./navigation/AppNavigator";
 
-import { colors } from "./config";
+import { colors } from "./styles/colors";
 import { constants } from "./constants";
 import store from "./redux/store";
 
@@ -21,10 +21,7 @@ export default class App extends React.Component {
       require("./assets/images/logo-prod.png"),
     ]),
     Font.loadAsync({
-      // This is the font that we are using for our tab bar
       ...Icon.Ionicons.font,
-      // We include SpaceMono because we use it in HomeScreen.js. Feel free
-      // to remove this if you are not using it in your app
       "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
     }),
   ]);
@@ -73,7 +70,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
-  // this. for opac statusbar
   statusBar: {
     backgroundColor: colors.statusbar,
     height: constants.statusbarMargin,

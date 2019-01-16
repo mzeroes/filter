@@ -6,9 +6,9 @@ import {
   Text
 } from "react-native";
 
-import { colors } from "../../config";
-import { loginUserWithFBToken, validateFBTokenAsync } from "../../config/api";
-import { getStoredToken } from "../../redux/store";
+import { colors } from "../../styles/colors";
+import { validateTokenAsync } from "../../api/user";
+import { getStoredToken, userUpdate } from "../../api/stored";
 
 export default class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -16,23 +16,20 @@ export default class AuthLoadingScreen extends React.Component {
     this.bootstrapAsync();
   }
 
-  state = { validToken: false };
-
-  validateTokenAsync = async (token) => {
-    const response = await validateFBTokenAsync(token);
-    if (response) {
-      this.setState({ validToken: true });
-    }
-  };
+  state = { validatedUserToken: false };
 
   bootstrapAsync = async () => {
-    const userToken = await getStoredToken();
-    if (userToken) {
-      await this.validateTokenAsync(userToken)
-        .catch(err => console.warn(err));
+    const storedData = await getStoredToken();
+    console.log(storedData);
+    if (storedData) {
+      const response = await validateTokenAsync(storedData);
+      if (response) {
+        this.setState({ validatedUserToken: true });
+        userUpdate();
+      }
     }
     this.props.navigation
-      .navigate(this.state.validToken ? "App" : "Auth");
+      .navigate(this.state.validatedUserToken ? "App" : "Auth");
   };
 
   render() {

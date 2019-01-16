@@ -6,7 +6,7 @@ import DetailsList from "../../components/DetailsListCard";
 import UserProfileCard from "../../components/UserProfileCard";
 
 import { profileDetails, details } from "../../constants/mockDetails";
-import { colors } from "../../config";
+import { colors } from "../../styles/colors";
 
 class SettingsScreen extends React.Component {
   static navigationOptions = {

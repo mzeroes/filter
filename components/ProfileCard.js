@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 
-import { colors } from "../config";
+import { colors } from "../styles/colors";
 
 const SectionHeader = ({ title }) => <View />;
 // return (

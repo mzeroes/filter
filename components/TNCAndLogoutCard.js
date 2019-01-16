@@ -5,8 +5,8 @@ import {
   Text,
   TouchableOpacity
 } from "react-native";
-
-import { colors, config } from "../config";
+import { config } from "../config";
+import { colors } from "../styles/colors";
 import { handleUrl, onPressLogoutAsync } from "../utils";
 
 const TNCAndLogoutCard = () => (

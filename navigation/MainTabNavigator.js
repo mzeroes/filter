@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform } from "react-native";
+import { View, Text, Platform } from "react-native";
 import {
   createStackNavigator,
   createBottomTabNavigator
@@ -9,12 +9,20 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/App/HomeScreen";
 import ExploreScreen from "../screens/App/ExploreScreen";
 import SettingsScreen from "../screens/App/SettingsScreen";
-import { colors } from "../config";
+import { colors } from "../styles/colors";
 import ChatsScreen from "../screens/App/ChatsScreen";
 import PostsScreen from "../screens/App/PostsScreen";
 
+const HelloScreen = props => (
+  <View>
+    <Text>
+      Hello, Worls!
+    </Text>
+  </View>
+);
 const HomeStack = createStackNavigator({
-  Home: HomeScreen
+  Home: HomeScreen,
+  Hello: HelloScreen
 });
 
 HomeStack.navigationOptions = {
