@@ -1,4 +1,5 @@
 // NavigationService.js
+// this provides navigator to authScreen directly
 import { NavigationActions } from "react-navigation";
 
 let logoutnavigator;
@@ -15,8 +16,6 @@ function navigate(routeName, params) {
     })
   );
 }
-
-// add other navigation functions that you need and export them
 
 export default {
   navigate,

@@ -10,16 +10,15 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ScrollView
 } from "react-native";
 
 import { ImagePicker, Permissions } from "expo";
 import { colors } from "../../styles/colors";
 import TabBarIcon from "../../components/TabBarIcon";
-import { deviceInfo } from "../../constants";
 import Layout from "../../constants/Layout";
+import uploadImageAsync from "../../utils/uploadPhoto";
 
-export default class App extends Component {
+export default class PostScreen extends Component {
   static navigationOptions = {
     header: null
   };
@@ -50,11 +49,6 @@ export default class App extends Component {
       <View style={styles.maybeRenderContainer}>
         <View style={styles.maybeRenderImageContainer}>
           {image === null ? (
-            // <Image
-            //   source={require("../../assets/images/upload-image.png")}
-            //   style={styles.maybeRenderImage}
-            // />
-            // <TabBarIcon name="ios-images" size={80} />
             <Text />
           )
             : (
@@ -123,8 +117,8 @@ export default class App extends Component {
   };
 
   handleImagePicked = async (pickerResult) => {
-    let uploadResponse; let
-      uploadResult;
+    let uploadResponse;
+    let uploadResult;
 
     try {
       this.setState({
@@ -152,7 +146,6 @@ export default class App extends Component {
   };
 
   render() {
-    const { image } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.headingContainer}>
@@ -225,40 +218,6 @@ export default class App extends Component {
       </View>
     );
   }
-}
-
-async function uploadImageAsync(uri) {
-  const apiUrl = "https://file-upload-example-backend-dkhqoilqqn.now.sh/upload";
-
-  // Note:
-  // Uncomment this if you want to experiment with local server
-  //
-  // if (Constants.isDevice) {
-  //   apiUrl = `https://your-ngrok-subdomain.ngrok.io/upload`;
-  // } else {
-  //   apiUrl = `http://localhost:3000/upload`
-  // }
-
-  const uriParts = uri.split(".");
-  const fileType = uriParts[uriParts.length - 1];
-
-  const formData = new FormData();
-  formData.append("photo", {
-    uri,
-    name: `photo.${fileType}`,
-    type: `image/${fileType}`,
-  });
-
-  const options = {
-    method: "POST",
-    body: formData,
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "multipart/form-data",
-    },
-  };
-
-  return fetch(apiUrl, options);
 }
 
 const styles = StyleSheet.create({

@@ -42,7 +42,7 @@ const MainMapView = props => (
         color: colors.dark
       }}
       >
-        Hello Google!
+        Testing OTA
       </Text>
     </View>
     <MapView
